@@ -6,12 +6,14 @@ use orx_col_dim::{DescendentIdxD1, DescendentIdxD2, DescendentIdxD3, DescendentI
 // d1
 
 impl<T> Card<D1> for VecDeque<T> {
+    #[inline(always)]
     fn card(&self, idx: impl Into<<D1 as Dim>::DescendentIdx>) -> usize {
         match idx.into() {
             DescendentIdxD1::Child0([]) => self.len(),
         }
     }
 
+    #[inline(always)]
     fn try_card(&self, idx: impl Into<<D1 as Dim>::DescendentIdx>) -> Option<usize> {
         match idx.into() {
             DescendentIdxD1::Child0([]) => Some(self.len()),
@@ -25,6 +27,7 @@ impl<C1> Card<D2> for VecDeque<C1>
 where
     C1: Card<D1>,
 {
+    #[inline(always)]
     fn card(&self, idx: impl Into<<D2 as Dim>::DescendentIdx>) -> usize {
         match idx.into() {
             DescendentIdxD2::Child0([]) => self.len(),
@@ -32,6 +35,7 @@ where
         }
     }
 
+    #[inline(always)]
     fn try_card(&self, idx: impl Into<<D2 as Dim>::DescendentIdx>) -> Option<usize> {
         match idx.into() {
             DescendentIdxD2::Child0([]) => Some(self.len()),
