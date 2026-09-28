@@ -20,7 +20,7 @@ extern crate std;
 mod card;
 mod card_of;
 mod d1;
-mod impl_d1;
+mod r#impl;
 
 pub use card::Card;
 pub use card_of::CardOf;
