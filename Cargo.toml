@@ -11,5 +11,4 @@ categories = ["data-structures", "algorithms", "no-std"]
 
 [dependencies]
 derive-new = { version = "0.7", default-features = false }
-# orx-col-dim = { version = "0.1", default-features = false }
-orx-col-dim = { path = "../orx-col-dim", default-features = false }
+orx-col-dim = { version = "0.2", default-features = false }
