@@ -11,6 +11,12 @@ impl<T> Card<D1> for Vec<T> {
             DescendentIdxD1::Child0([]) => self.len(),
         }
     }
+
+    fn try_card(&self, idx: impl Into<<D1 as Dim>::DescendentIdx>) -> Option<usize> {
+        match idx.into() {
+            DescendentIdxD1::Child0([]) => Some(self.len()),
+        }
+    }
 }
 
 // d2
@@ -23,6 +29,13 @@ where
         match idx.into() {
             DescendentIdxD2::Child0([]) => self.len(),
             DescendentIdxD2::Child1([i]) => self[i].card([]),
+        }
+    }
+
+    fn try_card(&self, idx: impl Into<<D2 as Dim>::DescendentIdx>) -> Option<usize> {
+        match idx.into() {
+            DescendentIdxD2::Child0([]) => Some(self.len()),
+            DescendentIdxD2::Child1([i]) => self.get(i).and_then(|x| x.try_card([])),
         }
     }
 }
@@ -40,6 +53,14 @@ where
             DescendentIdxD3::Child2([i, j]) => self[i].card([j]),
         }
     }
+
+    fn try_card(&self, idx: impl Into<<D3 as Dim>::DescendentIdx>) -> Option<usize> {
+        match idx.into() {
+            DescendentIdxD3::Child0([]) => Some(self.len()),
+            DescendentIdxD3::Child1([i]) => self.get(i).and_then(|x| x.try_card([])),
+            DescendentIdxD3::Child2([i, j]) => self.get(i).and_then(|x| x.try_card([j])),
+        }
+    }
 }
 
 // d4
@@ -54,6 +75,15 @@ where
             DescendentIdxD4::Child1([i]) => self[i].card([]),
             DescendentIdxD4::Child2([i, j]) => self[i].card([j]),
             DescendentIdxD4::Child3([i, j, k]) => self[i].card([j, k]),
+        }
+    }
+
+    fn try_card(&self, idx: impl Into<<D4 as Dim>::DescendentIdx>) -> Option<usize> {
+        match idx.into() {
+            DescendentIdxD4::Child0([]) => Some(self.len()),
+            DescendentIdxD4::Child1([i]) => self.get(i).and_then(|x| x.try_card([])),
+            DescendentIdxD4::Child2([i, j]) => self.get(i).and_then(|x| x.try_card([j])),
+            DescendentIdxD4::Child3([i, j, k]) => self.get(i).and_then(|x| x.try_card([j, k])),
         }
     }
 }
