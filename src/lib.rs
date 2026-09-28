@@ -21,3 +21,4 @@ mod card;
 mod r#impl;
 
 pub use card::Card;
+pub use orx_col_dim::*;
